@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1dnyx89" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.1">
+  <bpmn:process id="entrega-de-trabalho" name="Entrega de Trabalho" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Entrega de Trabalho Escolar">
+      <bpmn:outgoing>Flow_0q2tspz</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0q2tspz" sourceRef="StartEvent_1" targetRef="Activity_0r1on4i" />
+    <bpmn:userTask id="Activity_0r1on4i" name="Aluno Envia Trabalho" camunda:assignee="demo">
+      <bpmn:documentation>O aluno deve enviar o programa em C# compactado com tamanho máximo de 2MB.</bpmn:documentation>
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="curso" label="Curso" type="enum">
+            <camunda:value id="MBA-IA" name="MBA em Inteligência Artificial" />
+            <camunda:value id="MBA-BIGDATA" name="MBA em Big Data Science" />
+            <camunda:value id="MBA-BPM" name="MBA em Business Process Management" />
+            <camunda:value id="MBA-BI" name="MBA em Business Inteligência " />
+          </camunda:formField>
+          <camunda:formField id="materia" label="Matéria" type="string">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+              <camunda:constraint name="maxlength" config="20" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="ano" label="Ano" type="long">
+            <camunda:validation>
+              <camunda:constraint name="min" config="2019" />
+              <camunda:constraint name="max" config="2021" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0q2tspz</bpmn:incoming>
+      <bpmn:outgoing>Flow_14c7hvk</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_14c7hvk" sourceRef="Activity_0r1on4i" targetRef="Activity_15zh5uw" />
+    <bpmn:endEvent id="Event_0ezlg3t" name="Trabalho Recebido">
+      <bpmn:incoming>Flow_0ljdaqi</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0ljdaqi" sourceRef="Activity_15zh5uw" targetRef="Event_0ezlg3t" />
+    <bpmn:userTask id="Activity_15zh5uw" name="Professor Recebe Trabalho" camunda:assignee="demo">
+      <bpmn:extensionElements>
+        <camunda:formData>       
+          <camunda:formField id="materia" label="Matéria" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+             <camunda:formField id="nota" label="Nota" type="long">
+            <camunda:validation>
+              <camunda:constraint name="min" config="0" />
+              <camunda:constraint name="max" config="10" />
+              <camunda:constraint name="required" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_14c7hvk</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ljdaqi</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="entrega-de-trabalho">
+      <bpmndi:BPMNEdge id="Flow_0q2tspz_di" bpmnElement="Flow_0q2tspz">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_14c7hvk_di" bpmnElement="Flow_14c7hvk">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="400" y="117" />
+        <di:waypoint x="400" y="116" />
+        <di:waypoint x="430" y="116" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ljdaqi_di" bpmnElement="Flow_0ljdaqi">
+        <di:waypoint x="530" y="116" />
+        <di:waypoint x="561" y="116" />
+        <di:waypoint x="561" y="117" />
+        <di:waypoint x="592" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="158" y="142" width="84" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1n813im_di" bpmnElement="Activity_0r1on4i">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0ezlg3t_di" bpmnElement="Event_0ezlg3t">
+        <dc:Bounds x="592" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="588" y="142" width="47" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0eceodq_di" bpmnElement="Activity_15zh5uw">
+        <dc:Bounds x="430" y="76" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
