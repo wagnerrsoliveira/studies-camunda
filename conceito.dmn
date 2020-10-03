@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_1py3ghj" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.7.1">
+  <decision id="dmnconceito" name="Conceito">
+    <extensionElements>
+      <biodi:bounds x="150" y="150" width="180" height="80" />
+    </extensionElements>
+    <decisionTable id="decisionTable_1" hitPolicy="FIRST">
+      <input id="input_1" label="Nota" camunda:inputVariable="nota">
+        <inputExpression id="inputExpression_1" typeRef="integer">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="output_1" label="Conceito" name="conceito" typeRef="string" />
+      <rule id="DecisionRule_0zf15j7">
+        <inputEntry id="UnaryTests_0buffah">
+          <text>&gt;9</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0eawexk">
+          <text>"A"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1jecsfe">
+        <inputEntry id="UnaryTests_1k5dlfj">
+          <text>&gt;8</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_15c8tvj">
+          <text>"B"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0wtnyni">
+        <inputEntry id="UnaryTests_0plcgua">
+          <text>&gt;= 7</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1rrs4kr">
+          <text>"C"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1abnmzj">
+        <inputEntry id="UnaryTests_0egasba">
+          <text>&gt;5</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0rzqpl1">
+          <text>"D"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_11ekfbl">
+        <inputEntry id="UnaryTests_1hmy2tb">
+          <text>&gt;3</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_06b71fd">
+          <text>"E"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0bmu05t">
+        <inputEntry id="UnaryTests_1csx7jk">
+          <text>&gt;=0</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0l4g8y2">
+          <text>"F"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
