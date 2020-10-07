@@ -1,26 +1,27 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCalculationProcess", "SimpleCalculationProcess\SimpleCalculationProcess.csproj", "{ACA89FE7-C6D2-4F28-930C-D3C1C5749544}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsuranceApplicationCamundaTasklist", "InsuranceApplicationCamundaTasklist\InsuranceApplicationCamundaTasklist.csproj", "{568C1DFC-324F-45BA-900B-3BDEFD6C16D5}"
-	ProjectSection(ProjectDependencies) = postProject
-		{D316A8E0-09CB-4D66-B635-94860C3EB799} = {D316A8E0-09CB-4D66-B635-94860C3EB799}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsuranceApplicationWpfTasklist", "InsuranceApplicationWpfTasklist\InsuranceApplicationWpfTasklist.csproj", "{C1402DC3-95BC-43DB-811C-D5B89AC74E4C}"
-	ProjectSection(ProjectDependencies) = postProject
-		{D316A8E0-09CB-4D66-B635-94860C3EB799} = {D316A8E0-09CB-4D66-B635-94860C3EB799}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebinarDemoWorker", "WarehouseWorker\WebinarDemoWorker.csproj", "{DD198A37-70EE-4030-A5E2-67C6658C423D}"
-	ProjectSection(ProjectDependencies) = postProject
-		{D316A8E0-09CB-4D66-B635-94860C3EB799} = {D316A8E0-09CB-4D66-B635-94860C3EB799}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Urlaubsantrag", "Urlaubsantrag\Urlaubsantrag.csproj", "{F0F0D892-4F55-41EE-939F-E5324F64B126}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GravaNotaProcess", "GravaNotaProcess\GravaNotaProcess.csproj", "{3B2BEA00-6C34-4C57-9F7B-E8D50D21AF34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GravaNota2Process", "GravaNota2Processo\GravaNota2Process.csproj", "{2712B4CB-9E99-44F5-9DC9-E88099202506}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExecCamunda", "ExecCamunda\ExecCamunda.csproj", "{4401FAED-578C-4F45-9FC0-DFFFB167FA0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Execmatricula", "Execmatricula\Execmatricula.csproj", "{01D5D013-158D-45C8-AAFA-831A12DAA319}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunMatricula", "RunMatricula\RunMatricula.csproj", "{254B9941-E3A1-4613-B121-61FF114334FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,10 +29,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D316A8E0-09CB-4D66-B635-94860C3EB799}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D316A8E0-09CB-4D66-B635-94860C3EB799}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D316A8E0-09CB-4D66-B635-94860C3EB799}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D316A8E0-09CB-4D66-B635-94860C3EB799}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ACA89FE7-C6D2-4F28-930C-D3C1C5749544}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ACA89FE7-C6D2-4F28-930C-D3C1C5749544}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACA89FE7-C6D2-4F28-930C-D3C1C5749544}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -52,8 +49,31 @@ Global
 		{F0F0D892-4F55-41EE-939F-E5324F64B126}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F0F0D892-4F55-41EE-939F-E5324F64B126}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F0F0D892-4F55-41EE-939F-E5324F64B126}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B2BEA00-6C34-4C57-9F7B-E8D50D21AF34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B2BEA00-6C34-4C57-9F7B-E8D50D21AF34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B2BEA00-6C34-4C57-9F7B-E8D50D21AF34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B2BEA00-6C34-4C57-9F7B-E8D50D21AF34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2712B4CB-9E99-44F5-9DC9-E88099202506}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2712B4CB-9E99-44F5-9DC9-E88099202506}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2712B4CB-9E99-44F5-9DC9-E88099202506}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2712B4CB-9E99-44F5-9DC9-E88099202506}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4401FAED-578C-4F45-9FC0-DFFFB167FA0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4401FAED-578C-4F45-9FC0-DFFFB167FA0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4401FAED-578C-4F45-9FC0-DFFFB167FA0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4401FAED-578C-4F45-9FC0-DFFFB167FA0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01D5D013-158D-45C8-AAFA-831A12DAA319}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01D5D013-158D-45C8-AAFA-831A12DAA319}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01D5D013-158D-45C8-AAFA-831A12DAA319}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01D5D013-158D-45C8-AAFA-831A12DAA319}.Release|Any CPU.Build.0 = Release|Any CPU
+		{254B9941-E3A1-4613-B121-61FF114334FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{254B9941-E3A1-4613-B121-61FF114334FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{254B9941-E3A1-4613-B121-61FF114334FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{254B9941-E3A1-4613-B121-61FF114334FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E2A80210-51BC-4E26-B652-A5661DE11C7F}
 	EndGlobalSection
 EndGlobal

@@ -16,15 +16,18 @@ namespace InsuranceApplicationCamundaTasklist.Worker
         {
             string email = (string)externalTask.Variables["email"].Value;
 
-            MailMessage mail = new MailMessage("demo@camunda.com", email);
+            MailMessage mail = new MailMessage("marcio@ambientelivre.com.br", email);
             SmtpClient client = new SmtpClient();
 
             //...
-            client.Port = 25;
+            client.Port = 465;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.UseDefaultCredentials = false;
-            client.Host = "mail.camunda.com";
-            client.Credentials = new NetworkCredential("demo@mx.camunda.com", "28484234386345");
+            client.EnableSsl = true;
+            client.Host = "smtp.gmail.com";
+            client.Credentials = new NetworkCredential("marcio@ambientelivre.com.br", "");
+
+
             if ((bool)externalTask.Variables["approved"].Value)
             {
                 mail.Subject = "Your insurance policy was issued";

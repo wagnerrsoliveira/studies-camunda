@@ -20,9 +20,11 @@ namespace InsuranceApplicationProcess
             var camunda = new CamundaEngineClient(new System.Uri("http://localhost:8080/engine-rest/engine/default/"), null, null);
 
             // Deploy the models under test
-            string deploymentId = camunda.RepositoryService.Deploy("testcase", new List<object> {
+            string deploymentId = camunda.RepositoryService.Deploy("testcaseMarcio", new List<object> {
                     FileParameter.FromManifestResource(Assembly.GetExecutingAssembly(), "InsuranceApplicationCamundaTasklist.CamundaModels.DE.InsuranceApplication.bpmn"),
-                    FileParameter.FromManifestResource(Assembly.GetExecutingAssembly(), "InsuranceApplicationCamundaTasklist.CamundaModels.DE.RiskAssessment.dmn")});
+                    FileParameter.FromManifestResource(Assembly.GetExecutingAssembly(), "InsuranceApplicationCamundaTasklist.CamundaModels.DE.RiskAssessment.dmn"),
+                    FileParameter.FromManifestResource(Assembly.GetExecutingAssembly(), "InsuranceApplicationCamundaTasklist.CamundaModels.EN.trimFeatures.ps1")
+            });
 
             try
             {
@@ -63,7 +65,7 @@ namespace InsuranceApplicationProcess
             finally
             {
                 // cleanup after test case
-                camunda.RepositoryService.DeleteDeployment(deploymentId);
+              //  camunda.RepositoryService.DeleteDeployment(deploymentId);
             }
         }
     }

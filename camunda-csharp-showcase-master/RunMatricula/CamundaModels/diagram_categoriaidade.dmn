@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_1d5rbbs" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.7.1">
+  <decision id="categoriaidade" name="Categoria da Idade">
+    <extensionElements>
+      <biodi:bounds x="150" y="150" width="180" height="80" />
+    </extensionElements>
+    <decisionTable id="decisionTable_1" hitPolicy="FIRST">
+      <input id="input_1" label="Idade" camunda:inputVariable="idade">
+        <inputExpression id="inputExpression_1" typeRef="long">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="output_1" label="Categoria" name="categoria" typeRef="string" />
+      <rule id="DecisionRule_0xojf13">
+        <inputEntry id="UnaryTests_12y2hni">
+          <text>&gt;= 18</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_00b064f">
+          <text>"Adulto"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1cl66k8">
+        <inputEntry id="UnaryTests_13wixma">
+          <text>&gt;14</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1ocjkoj">
+          <text>"Adolecente"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_16uc160">
+        <inputEntry id="UnaryTests_1ogjp63">
+          <text>&gt;= 0</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0sv0kep">
+          <text>"Crianca"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

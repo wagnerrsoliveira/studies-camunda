@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_16vv7j7" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.1">
+  <bpmn:process id="processomatricula" name="Processo Matricula de Aluno - Marcio" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Matricula Aluno" camunda:formKey="embedded:deployment:CamundaModels.start.html" camunda:initiator="userstart">
+      <bpmn:outgoing>Flow_1s518su</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1s518su" sourceRef="StartEvent_1" targetRef="Activity_0z08jzy" />
+    <bpmn:sequenceFlow id="Flow_16gor3r" sourceRef="Activity_09l4cww" targetRef="Activity_12jkmti" />
+    <bpmn:exclusiveGateway id="Gateway_0uaxbe2">
+      <bpmn:incoming>Flow_1f25mtk</bpmn:incoming>
+      <bpmn:outgoing>Flow_0z45dty</bpmn:outgoing>
+      <bpmn:outgoing>Flow_163wubf</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1f25mtk" sourceRef="Activity_12jkmti" targetRef="Gateway_0uaxbe2" />
+    <bpmn:sequenceFlow id="Flow_0z45dty" name="Adultos" sourceRef="Gateway_0uaxbe2" targetRef="Activity_0jni1rs">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${categoria=="Adulto"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_163wubf" name="Adolecentes e Criancas" sourceRef="Gateway_0uaxbe2" targetRef="Activity_1320ejs">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${categoria == "Adolecente" or categoria == "Crianca"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="Event_0m0js10" name="Finalizado Matricula">
+      <bpmn:incoming>Flow_0lcjr5k</bpmn:incoming>
+      <bpmn:incoming>Flow_07xgxmm</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0lcjr5k" sourceRef="Activity_1320ejs" targetRef="Event_0m0js10" />
+    <bpmn:sequenceFlow id="Flow_07xgxmm" sourceRef="Activity_0jni1rs" targetRef="Event_0m0js10" />
+    <bpmn:userTask id="Activity_0z08jzy" name="Aluno insere dados" camunda:assignee="${userstart}" camunda:dueDate="${dateTime().plusDays(1).toDate()}">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="nome" label="Nome do Aluno" type="string">
+            <camunda:validation>
+              <camunda:constraint name="maxlength" config="50" />
+              <camunda:constraint name="required" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="idade" label="Idade do Aluno" type="long">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+              <camunda:constraint name="max" config="99" />
+              <camunda:constraint name="min" config="1" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1s518su</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ecr387</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_09l4cww" name="professor insere Matricula" camunda:assignee="${professor}" camunda:dueDate="${dateTime().plusDays(2).toDate()}">
+      <bpmn:documentation>Ola ${professor} o aluno com nome ${nome} que tem a idade ${idade} esta solicitando a matricula. Favor analizar e informar a matricula.</bpmn:documentation>
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="nome" label="Nome do Aluno" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="idade" label="Idade do Aluno" type="long">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="matricula" label="Matricula do Aluno" type="long">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1kzy7df</bpmn:incoming>
+      <bpmn:outgoing>Flow_16gor3r</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:businessRuleTask id="Activity_12jkmti" name="Categoria de Idade" camunda:resultVariable="categoria" camunda:decisionRef="categoriaidade" camunda:mapDecisionResult="singleEntry">
+      <bpmn:incoming>Flow_16gor3r</bpmn:incoming>
+      <bpmn:outgoing>Flow_1f25mtk</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:userTask id="Activity_0jni1rs" name="Aluno Matriculado" camunda:assignee="${userstart}" camunda:dueDate="${dateTime().plusDays(3).toDate()}">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="matricula" type="long">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0z45dty</bpmn:incoming>
+      <bpmn:outgoing>Flow_07xgxmm</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_1320ejs" name="Aluno Rejeitado" camunda:assignee="${userstart}" camunda:followUpDate="${dateTime().plusDays(3).toDate()}">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="matricula" label="Matricula do Aluno" type="long">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_163wubf</bpmn:incoming>
+      <bpmn:outgoing>Flow_0lcjr5k</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0ecr387" sourceRef="Activity_0z08jzy" targetRef="Activity_084xlbi" />
+    <bpmn:sequenceFlow id="Flow_1kzy7df" sourceRef="Activity_084xlbi" targetRef="Activity_09l4cww" />
+    <bpmn:serviceTask id="Activity_084xlbi" name="Gera Matricula" camunda:type="external" camunda:topic="matricula">
+      <bpmn:incoming>Flow_0ecr387</bpmn:incoming>
+      <bpmn:outgoing>Flow_1kzy7df</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="processomatricula">
+      <bpmndi:BPMNEdge id="Flow_1kzy7df_di" bpmnElement="Flow_1kzy7df">
+        <di:waypoint x="410" y="117" />
+        <di:waypoint x="520" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ecr387_di" bpmnElement="Flow_0ecr387">
+        <di:waypoint x="260" y="117" />
+        <di:waypoint x="310" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_07xgxmm_di" bpmnElement="Flow_07xgxmm">
+        <di:waypoint x="1060" y="117" />
+        <di:waypoint x="1096" y="117" />
+        <di:waypoint x="1096" y="170" />
+        <di:waypoint x="1192" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0lcjr5k_di" bpmnElement="Flow_0lcjr5k">
+        <di:waypoint x="1060" y="250" />
+        <di:waypoint x="1126" y="250" />
+        <di:waypoint x="1126" y="170" />
+        <di:waypoint x="1192" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_163wubf_di" bpmnElement="Flow_163wubf">
+        <di:waypoint x="870" y="142" />
+        <di:waypoint x="870" y="250" />
+        <di:waypoint x="960" y="250" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="852" y="256" width="69" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0z45dty_di" bpmnElement="Flow_0z45dty">
+        <di:waypoint x="895" y="117" />
+        <di:waypoint x="960" y="117" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="909" y="99" width="37" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1f25mtk_di" bpmnElement="Flow_1f25mtk">
+        <di:waypoint x="780" y="117" />
+        <di:waypoint x="845" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_16gor3r_di" bpmnElement="Flow_16gor3r">
+        <di:waypoint x="620" y="117" />
+        <di:waypoint x="680" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1s518su_di" bpmnElement="Flow_1s518su">
+        <di:waypoint x="210" y="332" />
+        <di:waypoint x="210" y="157" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="192" y="332" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="172" y="375" width="76" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0uaxbe2_di" bpmnElement="Gateway_0uaxbe2" isMarkerVisible="true">
+        <dc:Bounds x="845" y="92" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0m0js10_di" bpmnElement="Event_0m0js10">
+        <dc:Bounds x="1192" y="152" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1185" y="195" width="51" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0g7m627_di" bpmnElement="Activity_0z08jzy">
+        <dc:Bounds x="160" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_136oiju_di" bpmnElement="Activity_09l4cww">
+        <dc:Bounds x="520" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0wuj6xd_di" bpmnElement="Activity_12jkmti">
+        <dc:Bounds x="680" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_094zu2x_di" bpmnElement="Activity_0jni1rs">
+        <dc:Bounds x="960" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0m32vo3_di" bpmnElement="Activity_1320ejs">
+        <dc:Bounds x="960" y="210" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_04x36yb_di" bpmnElement="Activity_084xlbi">
+        <dc:Bounds x="310" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
